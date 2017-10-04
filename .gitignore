@@ -1,0 +1,3 @@
+# Ignoring dotnet output folders
+*/bin/
+*/obj/
