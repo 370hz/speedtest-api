@@ -1,4 +1,4 @@
-module Speedtest.Api.Server
+module Speedtest.Api.Host.Server
 
 open System
 open System.IO
@@ -11,7 +11,7 @@ open Microsoft.Extensions.DependencyInjection
 open Giraffe.HttpHandlers
 open Giraffe.Middleware
 
-open Speedtest.Api.WebApp
+open Speedtest.Api.Host.Routes
 
 let errorHandler (ex : Exception) (logger : ILogger) =
     logger.LogError(EventId(), ex, "An unhandled exception has occurred while executing the request.")
@@ -19,7 +19,7 @@ let errorHandler (ex : Exception) (logger : ILogger) =
 
 let configureApp (app : IApplicationBuilder) =
     app.UseGiraffeErrorHandler errorHandler
-    app.UseGiraffe webApp
+    app.UseGiraffe routeHandler
 
 let configureServices (services : IServiceCollection) =
     services.BuildServiceProvider() |> ignore

@@ -17,11 +17,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../Speedtest.Api.Model/Speedtest.Api.Model.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="WebApp.fs" />
+    <Compile Include="Routes.fs" />
     <Compile Include="Server.fs" />
   </ItemGroup>
   

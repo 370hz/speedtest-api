@@ -1,4 +1,4 @@
-module Speedtest.Api.WebApp
+module Speedtest.Api.Host.Routes
 
 open System
 open Microsoft.AspNetCore.Http
@@ -6,36 +6,22 @@ open Giraffe.HttpHandlers
 open Giraffe.Tasks
 open Giraffe.HttpContextExtensions
 
-type Speedtest = {
-    Id: Guid
-    Download: double
-    Timestamp: int
-}
-
-type Speedtests = Speedtest list
-
-let s = {
-    Id = Guid.NewGuid()
-    Download = 20.0
-    Timestamp = 1234
-}
-
-let sss = [s; s; s]
+open Speedtest.Api.Model
 
 let getSpeedtests =
     fun (next : HttpFunc) (ctx : HttpContext) ->
         task {
-            return! json sss next ctx
+            return! json SpeedtestModel.getSpeedtests next ctx
         }
 
 let postSpeedtests =
     fun (next : HttpFunc) (ctx : HttpContext) ->
         task {
-            let! speedtest = ctx.BindJson<Speedtest>()
-            return! json speedtest next ctx
+            let! speedtest = ctx.BindJson<SpeedtestModel.Speedtest>()
+            return! json (SpeedtestModel.postSpeedtests speedtest) next ctx
         }
 
-let webApp : HttpHandler =
+let routeHandler : HttpHandler =
     choose [
         route "/speedtests" >=>
             choose [
