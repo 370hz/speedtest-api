@@ -1,3 +1,6 @@
 # Ignoring dotnet output folders
 */bin/
 */obj/
+
+# Ignoring Speedtest.Api.Data for now
+Speedtest.Api.Data/
