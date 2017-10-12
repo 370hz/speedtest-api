@@ -7,7 +7,8 @@ open Microsoft.Extensions.Configuration.Json
 open Microsoft.WindowsAzure.Storage
 open Microsoft.WindowsAzure.Storage.Table
 
-type Customer(firstName, lastName, email: string, phone: string) =
+// OBS, ikke lag alt sånn
+type Customer (firstName, lastName, email: string, phone: string) =
     inherit TableEntity(partitionKey=lastName, rowKey=firstName)
     new() = Customer(null, null, null, null)
     member val Email = email with get, set
@@ -46,7 +47,7 @@ let testStorage =
     // Retrieve a reference to the table.
     let table = tableClient.GetTableReference("people")
     // Create the table if it doesn't exist.
-    table.CreateIfNotExistsAsync() |> Async.AwaitTask |> Async.RunSynchronously |>  ignore //.CreateIfNotExists()
+    table.CreateIfNotExistsAsync() |> Async.AwaitTask |> Async.RunSynchronously |> ignore //.CreateIfNotExists()
 
     let customer = Customer("Yusef", "Harp", "Yusef@contoso.com", "425-555-0101")
     let insertOp = TableOperation.InsertOrReplace(customer)

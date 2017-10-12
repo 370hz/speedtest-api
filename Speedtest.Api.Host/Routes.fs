@@ -8,18 +8,16 @@ open Giraffe.HttpContextExtensions
 
 open Speedtest.Api.Model
 
-let getSpeedtests =
-    fun (next : HttpFunc) (ctx : HttpContext) ->
-        task {
-            return! json SpeedtestModel.getSpeedtests next ctx
-        }
+let getSpeedtests (next : HttpFunc) (ctx : HttpContext) =
+    task {
+        return! json SpeedtestModel.getSpeedtests next ctx
+    }
 
-let postSpeedtests =
-    fun (next : HttpFunc) (ctx : HttpContext) ->
-        task {
-            let! speedtest = ctx.BindJson<SpeedtestModel.Speedtest>()
-            return! json (SpeedtestModel.postSpeedtests speedtest) next ctx
-        }
+let postSpeedtests (next : HttpFunc) (ctx : HttpContext) =
+    task {
+        let! speedtest = ctx.BindJson<SpeedtestModel.Speedtest>()
+        return! json (SpeedtestModel.postSpeedtests speedtest) next ctx
+    }
 
 let routeHandler : HttpHandler =
     choose [
