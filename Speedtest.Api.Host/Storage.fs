@@ -35,7 +35,7 @@ let asyncQuery (table : CloudTable) (query : TableQuery<SpeedtestTableEntity>) =
     loop null []
 
 let cloudTable =
-    let storageConnString = "DefaultEndpointsProtocol=https;AccountName=speedtestdata;AccountKey=Dk0SqzZiji8Svik1zP+ByQCgkq7qdDndJXcTc3UJ3ovpn3zSOq0yj8bmAdmBOF2Yp3K5BjonYVzXn5crp9jGXw==;EndpointSuffix=core.windows.net"
+    let storageConnString = ""
     let storageAccount = CloudStorageAccount.Parse(storageConnString)
     let tableClient = storageAccount.CreateCloudTableClient()
     let table = tableClient.GetTableReference("speedtests")
