@@ -28,8 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Routes.fs" />
     <Compile Include="Storage.fs" />
+    <Compile Include="Routes.fs" />
     <Compile Include="Server.fs" />
     <!--<Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

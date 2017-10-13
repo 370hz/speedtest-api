@@ -1,27 +1,19 @@
-module Speedtest.Api.Model.SpeedtestModel
+module Speedtest.Api.Model.SpeedtestModel.Speedtest
 
 open System
 
-//[<CLIMutable>]
 type Speedtest = {
     Id: Guid
-    Download: double
-    Timestamp: int
+    Download: float
+    Timestamp: int64
 }
 
 type Speedtests = Speedtest list
 
-let now () = System.DateTime.UtcNow
-
-let postSpeedtests (speedtest : Speedtest) : Speedtest =
+let postSpeedtests (storeSpeedtest : Speedtest -> Speedtest) (speedtest : Speedtest) : Speedtest =
     printfn "Id: %s Download: %f Timestamp: %i" (string speedtest.Id) speedtest.Download speedtest.Timestamp
-    speedtest
+    storeSpeedtest speedtest
 
-let getSpeedtests =
+let getSpeedtests (allSpeedtests : _ -> Speedtests) : Speedtests =
     printfn "Getting all speedtests"
-    let s = {
-        Id = Guid.NewGuid()
-        Download = 20.0
-        Timestamp = 1234
-    }
-    [s; s; s]
+    allSpeedtests ()

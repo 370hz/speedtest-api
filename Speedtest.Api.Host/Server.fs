@@ -6,7 +6,7 @@ open System.Collections.Generic
 open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.AspNetCore.Http
-open Microsoft.Extensions.Configuration;
+open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.Configuration.Json
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection

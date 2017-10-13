@@ -6,17 +6,20 @@ open Giraffe.HttpHandlers
 open Giraffe.Tasks
 open Giraffe.HttpContextExtensions
 
-open Speedtest.Api.Model
+open Speedtest.Api.Model.SpeedtestModel.Speedtest
+open Speedtest.Api.Host.Storage
+
+let table = cloudTable
 
 let getSpeedtests (next : HttpFunc) (ctx : HttpContext) =
     task {
-        return! json SpeedtestModel.getSpeedtests next ctx
+        return! json (getSpeedtests (allSpeedtests table)) next ctx
     }
 
 let postSpeedtests (next : HttpFunc) (ctx : HttpContext) =
     task {
-        let! speedtest = ctx.BindJson<SpeedtestModel.Speedtest>()
-        return! json (SpeedtestModel.postSpeedtests speedtest) next ctx
+        let! speedtest = ctx.BindJson<Speedtest>()
+        return! json (postSpeedtests (storeSpeedtest table) speedtest) next ctx
     }
 
 let routeHandler : HttpHandler =
